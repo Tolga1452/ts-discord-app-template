@@ -1,5 +1,6 @@
 <h2 align="center">
 	Discord App Template for TypeScript
+  <br />
 	<a href="https://notbyai.fyi"><img src="https://raw.githubusercontent.com/Tolga1452/ts-discord-app-template/main/assets/notbyai.png" height="84px" /></a>
 </h2>
 
