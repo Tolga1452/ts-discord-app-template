@@ -1,19 +1,30 @@
 {
-  "name": "ts-template",
+  "name": "ts-discord-app-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "A template for creating Discord applications using TypeScript.",
   "main": "./dist/index.js",
   "scripts": {
     "up": "pnpm update --latest",
-    "dev": "pnpm install && pnpm run up",
-    "prod": "pnpm install --omit=dev",
-    "start": "tsc && node ."
+    "dev": "pnpm install",
+    "dev:clean": "pnpm dev && pnpm command clear && pnpm component clear && pnpm modal clear",
+    "prod": "pnpm install --prod",
+    "update-cmds": "node ./scripts/update-commands.js",
+    "command": "node ./scripts/command.js",
+    "update-events": "node ./scripts/update-events.js",
+    "event": "node ./scripts/event.js",
+    "update-components": "node ./scripts/update-components.js",
+    "component": "node ./scripts/component.js",
+    "update-modals": "node ./scripts/update-modals.js",
+    "modal": "node ./scripts/modal.js",
+    "start": "pnpm update-cmds && pnpm update-components && pnpm update-modals && pnpm update-events && tsc && node ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["discord", "bot", "typescript", "ts", "template", "application", "app"],
+  "author": "Tolgchu",
+  "license": "MIT",
   "type": "module",
-  "devDependencies": {
+  "dependencies": {
+    "discord.js": "^14.21.0",
+    "dotenv": "^17.2.1",
     "@types/node": "^24.1.0",
     "typescript": "^5.8.3"
   }
