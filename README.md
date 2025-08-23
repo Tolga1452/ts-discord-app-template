@@ -2,8 +2,8 @@
 	Discord App Template for TypeScript
   <br />
   <br />
-	<a href="https://notbyai.fyi"><img src="https://raw.githubusercontent.com/Tolga1452/ts-discord-app-template/main/assets/notbyai.png" height="84px" /></a>
-</h2>
+	<a href="https://notbyai.fyi"><img src="https://raw.githubusercontent.com/Tolga1452/ts-discord-app-template/main/assets/notbyai.png" height="42px" /></a>
+</h1>
 
 This is a practical and advanced template for creating Discord applications using TypeScript. It includes some useful features, a basic file structure, example interaction files, and event handling.
 
