@@ -1,9 +1,17 @@
-<h2 align="center">
+<h1 align="center">
 	Discord App Template for TypeScript
   <br />
   <br />
 	<a href="https://notbyai.fyi"><img src="https://raw.githubusercontent.com/Tolga1452/ts-discord-app-template/main/assets/notbyai.png" height="42px" /></a>
-</h2>
+  <br />
+  <a href="https://github.com/Tolga1452/ts-discord-app-template/generate"><img alt="Use this template" src="https://img.shields.io/badge/use_this-template-2ea44f?logo=github" /></a>
+  <br />
+  <a href="https://github.com/Tolga1452/ts-discord-app-template/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tolga1452/ts-discord-app-template" /></a>
+  <a href="https://github.com/Tolga1452/ts-discord-app-template/releases"><img alt="Release" src="https://img.shields.io/github/v/release/Tolga1452/ts-discord-app-template?display_name=tag" /></a>
+  <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" /></a>
+  <a href="https://pnpm.io"><img alt="pnpm" src="https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff" /></a>
+  <a href="https://discord.js.org"><img alt="discord.js" src="https://img.shields.io/github/package-json/dependency-version/Tolga1452/ts-discord-app-template/discord.js" /></a>
+</h1>
 
 This is a practical and advanced template for creating Discord applications using TypeScript. It includes some useful features, a basic file structure, example interaction files, and event handling.
 
@@ -66,6 +74,8 @@ This is a practical and advanced template for creating Discord applications usin
 > Run `npm install -g pnpm` to install pnpm globally.
 
 1. Create a new repository using this template or clone it to your local machine.
+
+<a href="https://github.com/Tolga1452/ts-discord-app-template/generate"><img alt="Use this template" src="https://img.shields.io/badge/use_this-template-2ea44f?logo=github" /></a>
 
 ```bash
 git clone https://github.com/Tolga1452/ts-discord-app-template.git my-discord-app
