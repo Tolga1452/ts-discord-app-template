@@ -170,7 +170,7 @@ It will use `interaction.update()`.
 ```ts
 interaction.update2('You clicked the button!');
 
-interaction.reply2({
+interaction.update2({
   emoji: Emoji.Wave,
   content: 'You clicked the button!'
 });
