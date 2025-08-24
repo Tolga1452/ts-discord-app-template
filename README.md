@@ -15,6 +15,9 @@
 
 This is a practical and advanced template for creating Discord applications using TypeScript. It includes some useful features, a basic file structure, example interaction files, and event handling.
 
+> [!NOTE]
+> This project is under the MIT license. You are not required to credit me, but I would really appreciate it if you do.
+
 ## Features
 
 - Fully typed with the pain of TypeScript.
