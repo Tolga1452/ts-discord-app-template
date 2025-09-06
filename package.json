@@ -18,14 +18,22 @@
     "modal": "node ./scripts/modal.js",
     "start": "pnpm update-cmds && pnpm update-components && pnpm update-modals && pnpm update-events && tsc && node ."
   },
-  "keywords": ["discord", "bot", "typescript", "ts", "template", "application", "app"],
+  "keywords": [
+    "discord",
+    "bot",
+    "typescript",
+    "ts",
+    "template",
+    "application",
+    "app"
+  ],
   "author": "Tolgchu",
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "discord.js": "^14.21.0",
-    "dotenv": "^17.2.1",
-    "@types/node": "^24.1.0",
-    "typescript": "^5.8.3"
+    "@types/node": "^24.3.1",
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.2",
+    "typescript": "^5.9.2"
   }
 }
