@@ -1,4 +1,4 @@
-import { AnySelectMenuInteraction, AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, ClientEvents, ComponentType, ContextMenuCommandBuilder, InteractionCallbackResponse, InteractionReplyOptions, InteractionResponse, InteractionUpdateOptions, Message, MessageComponentInteraction, MessageContextMenuCommandInteraction, ModalSubmitInteraction, PrimaryEntryPointCommandData, PrimaryEntryPointCommandInteraction, SlashCommandBuilder, Snowflake, UserContextMenuCommandInteraction } from 'discord.js';
+import { AnySelectMenuInteraction, AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, ClientEvents, ComponentType, ContextMenuCommandBuilder, InteractionCallbackResponse, InteractionReplyOptions, InteractionResponse, InteractionUpdateOptions, Message, MessageComponentInteraction, MessageContextMenuCommandInteraction, ModalSubmitInteraction, PrimaryEntryPointCommandData, PrimaryEntryPointCommandInteraction, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder, Snowflake, UserContextMenuCommandInteraction } from 'discord.js';
 import { Emoji } from './enums.js';
 import CustomIdArgs from '../classes/CustomIdArgs.js';
 
@@ -7,7 +7,7 @@ export interface BaseNonPrimaryEntryPointCommand {
 };
 
 export interface ChatInputCommand extends BaseNonPrimaryEntryPointCommand {
-    data: SlashCommandBuilder;
+    data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | SlashCommandSubcommandsOnlyBuilder;
     execute(interaction: CustomChatInputCommandInteraction): Promise<void>;
     autocomplete?(interaction: AutocompleteInteraction): Promise<void>;
 };
