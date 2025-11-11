@@ -71,18 +71,11 @@ export default {
                 } catch (error) {
                     console.error('Error executing command:', error, command);
 
-                    if (!interaction.ephemeral) await (interaction as CustomCommandInteraction).reply2({
-                        emoji: Emoji.Wise,
-                        content: 'Hmmeow... This command has failed for some mysterious reason.'
-                    });
-
                     await (interaction as CustomCommandInteraction).reply2({
                         flags: [MessageFlags.Ephemeral],
                         emoji: Emoji.Dead,
                         content: 'This command feels... wrong. Maybe try again later?'
-                    }, true);
-
-                    if (!interaction.ephemeral) await interaction.deleteReply();
+                    });
                 };
             };
         } else if (interaction.isMessageComponent()) {
@@ -183,18 +176,11 @@ export default {
             } catch (error) {
                 console.error('Error executing component:', error, component);
 
-                if (!interaction.ephemeral) await (interaction as CustomMessageComponentInteraction).reply2({
-                    emoji: Emoji.Wise,
-                    content: "Hold on, I'm trying to delete this message... or maybe I failed."
-                });
-
                 await (interaction as CustomMessageComponentInteraction).reply2({
                     flags: [MessageFlags.Ephemeral],
                     emoji: Emoji.Dead,
                     content: 'Looks like this component feels sick right now. Can you try again later?'
-                }, true);
-
-                if (!interaction.ephemeral) await interaction.deleteReply();
+                });
             };
         } else if (interaction.isModalSubmit()) {
             (interaction as CustomModalSubmitInteraction).reply2 = async (options, followUp = false) => {
@@ -258,18 +244,11 @@ export default {
             } catch (error) {
                 console.error('Error executing modal:', error, modal);
 
-                if (!interaction.ephemeral) await (interaction as CustomModalSubmitInteraction).reply2({
-                    emoji: Emoji.Sweating,
-                    content: 'Just- give me a moment... I can delete this message... I believe in myself...'
-                });
-
                 await (interaction as CustomModalSubmitInteraction).reply2({
                     flags: [MessageFlags.Ephemeral],
                     emoji: Emoji.Dead,
                     content: 'I guess this modal is just exploded. What... did you do?'
-                }, true);
-
-                if (!interaction.ephemeral) await interaction.deleteReply();
+                });
             };
         };
     }
