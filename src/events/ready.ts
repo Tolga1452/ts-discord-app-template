@@ -28,14 +28,15 @@ export default {
                 };
 
                 for (const [guildId, cmds] of Object.entries(guilds)) {
-                    await client.guilds.fetch(guildId)
-                        .then(guild => {
-                            if (!guild) return;
-
-                            guild.commands.set(cmds.map(command => command.data.toJSON()))
-                                .then(() => console.log(`Registered ${cmds.length} commands for guild ${guildId}.`))
-                                .catch(error => console.error(`Failed to register commands for guild ${guildId}: ${error}`));
-                        })
+                    fetch(`https://discord.com/api/v10/applications/${client.user.id}/guilds/${guildId}/commands`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bot ${client.token}`
+                        },
+                        body: JSON.stringify(cmds.map(command => command.data.toJSON()))
+                    })
+                        .then(() => console.log(`Registered ${cmds.length} commands for guild ${guildId}.`))
                         .catch(error => console.error(`Failed to register commands for guild ${guildId}: ${error}`));
 
                     await new Promise(resolve => setTimeout(resolve, 1000));
