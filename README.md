@@ -25,6 +25,7 @@ This is a practical and advanced template for creating Discord applications usin
 - Comes with `ready` and `interactionCreate` events along with example interaction files.
 - Custom interaction functions: `interaction.reply2()` and `interaction.update2()`. These functions are made for automatically using components v2 along with some more useful features. [Click here to learn more](#interactions).
 - An advanced but simple way to use custom IDs. Working with args inside components has never been easier.
+- Automatic emoji syncing between your local folder and Discord application. I sacrificed my soul for this because Discord doesn't have an endpoint for bulk emoji management. [Click here to learn more](#emoji-syncing).
 - Easy error handling, included with funny error messages.
 - A useful debugging utility.
 
@@ -84,21 +85,22 @@ This is a practical and advanced template for creating Discord applications usin
 git clone https://github.com/Tolga1452/ts-discord-app-template.git my-discord-app
 ```
 
-2. Set up the development environment
+2. Install the dependencies
 
 ```bash
 cd my-discord-app
-pnpm dev
+pnpm install
 ```
 
 > [!TIP]
-> You can use the script `pnpm dev:clean` to remove any example interaction files.
+> You can run `pnpm clean` to remove any example interaction files.
 
 3. Rename the `.env.example` file to `.env` and update the environment variables as needed.
 
 - `DEBUG`: Set to `"true"` to enable debug logging.
 - `DISCORD_REGISTER_COMMANDS`: Set to `"true"` to automatically register commands when your application starts.
-- `DISCORD_TOKEN`: Your bot token (required).
+- `DISCORD_APP_ID`: Your Discord application ID (required).
+- `DISCORD_BOT_TOKEN`: Your bot token (required).
 
 ```bash
 cp .env.example .env
@@ -110,20 +112,29 @@ cp .env.example .env
 pnpm start
 ```
 
-5. After deploying your code, set up the production environment and run it.
-
-```bash
-pnpm prod
-pnpm start
-```
-
 ## Tips
 
-### Emojis
+### Emoji Syncing
 
-This project uses a custom way to use emojis in the interaction responses. You can edit the `types/enums.ts` file to modify emojis.
+This template comes with a script that automatically syncs your Discord application's emojis with your local folder, using your local folder as the source.
+
+Any emojis you add/modify/remove in the `src/emojis` folder will be synced to your Discord application when you run `pnpm emojis` or `pnpm start`. Synced emojis will be available in the `src/types/emojis.ts` file as the `Emoji` enum.
+
+> [!DANGER]
+> This system uses the `.projectCache` folder to keep track of the synced emojis. You **ARE** supposed to commit this folder because running the application without emoji cache will result in conflicts and errors.
+
+Since only the local folder is used as the source, it is not recommended to manually manage emojis from the Discord Developer Portal. But don't worry, if you have existing emojis in your application that are not cached locally, they will be automatically downloaded to the local folder and added to cache during the syncing process.
+
+If you do not want to use this feature at all, you can simply remove the `pnpm emojis` part from the `pnpm start` script in the `package.json` file.
+
+### Emojis in Interaction Responses
+
+This project uses a custom way to use emojis in the interaction responses.
 
 These emojis can also be used in the `interaction.reply2()` and `interaction.update2()` custom interaction functions, by providing the `emoji` field in the options object.
+
+> [!NOTE]
+> This feature is typed using the `Emoji` enum from the file `src/types/emojis.ts` that is automatically generated during the [Emoji Syncing](#emoji-syncing) process (or should be manually updated if you removed the feature).
 
 ### Interactions
 

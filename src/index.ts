@@ -16,4 +16,4 @@ for (const event in events) {
     client.on(event, events[event].execute);
 };
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);

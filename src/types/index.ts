@@ -1,5 +1,5 @@
 import { AnySelectMenuInteraction, AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction, ClientEvents, ComponentType, ContextMenuCommandBuilder, InteractionCallbackResponse, InteractionReplyOptions, InteractionResponse, InteractionUpdateOptions, Message, MessageComponentInteraction, MessageContextMenuCommandInteraction, ModalSubmitInteraction, PrimaryEntryPointCommandData, PrimaryEntryPointCommandInteraction, SlashCommandBuilder, SlashCommandOptionsOnlyBuilder, SlashCommandSubcommandsOnlyBuilder, Snowflake, UserContextMenuCommandInteraction } from 'discord.js';
-import { Emoji } from './enums.js';
+import { Emoji } from './emojis.js';
 import CustomIdArgs from '../classes/CustomIdArgs.js';
 
 export interface BaseNonPrimaryEntryPointCommand {

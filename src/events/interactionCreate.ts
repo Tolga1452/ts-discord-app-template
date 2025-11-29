@@ -2,7 +2,7 @@ import { BitField, InteractionEditReplyOptions, InteractionReplyOptions, Interac
 import { CustomCommandInteraction, CustomMessageComponentInteraction, CustomModalSubmitInteraction, GatewayEvent } from '../types/index.js';
 import commands from '../utils/commands.js';
 import debug from '../utils/debug.js';
-import { Emoji } from '../types/enums.js';
+import { Emoji } from '../types/emojis.js';
 import components from '../utils/components.js';
 import CustomIdArgs from '../classes/CustomIdArgs.js';
 import modals from '../utils/modals.js';

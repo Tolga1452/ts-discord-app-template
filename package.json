@@ -4,10 +4,7 @@
   "description": "A template for creating Discord applications using TypeScript.",
   "main": "./dist/index.js",
   "scripts": {
-    "up": "pnpm update --latest",
-    "dev": "pnpm install",
-    "dev:clean": "pnpm dev && pnpm command clear && pnpm component clear && pnpm modal clear",
-    "prod": "pnpm install --prod",
+    "clean": "pnpm command clear && pnpm component clear && pnpm modal clear",
     "update-cmds": "node ./scripts/update-commands.js",
     "command": "node ./scripts/command.js",
     "update-events": "node ./scripts/update-events.js",
@@ -16,7 +13,8 @@
     "component": "node ./scripts/component.js",
     "update-modals": "node ./scripts/update-modals.js",
     "modal": "node ./scripts/modal.js",
-    "start": "pnpm update-cmds && pnpm update-components && pnpm update-modals && pnpm update-events && tsc && node ."
+    "emojis": "node ./scripts/update-emojis.js",
+    "start": "pnpm update-cmds && pnpm update-components && pnpm update-modals && pnpm update-events && pnpm emojis && tsc && node ."
   },
   "keywords": [
     "discord",

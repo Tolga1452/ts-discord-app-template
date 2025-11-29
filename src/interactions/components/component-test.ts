@@ -1,6 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextDisplayBuilder, userMention } from 'discord.js';
 import { Component } from '../../types/index.js';
-import { Emoji } from '../../types/enums.js';
+import { Emoji } from '../../types/emojis.js';
 import buildCustomId from '../../utils/buildCustomId.js';
 
 const args = ['userId', 'number'] as const;
