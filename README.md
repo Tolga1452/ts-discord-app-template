@@ -120,7 +120,7 @@ This template comes with a script that automatically syncs your Discord applicat
 
 Any emojis you add/modify/remove in the `src/emojis` folder will be synced to your Discord application when you run `pnpm emojis` or `pnpm start`. Synced emojis will be available in the `src/types/emojis.ts` file as the `Emoji` enum.
 
-> [!DANGER]
+> [!CAUTION]
 > This system uses the `.projectCache` folder to keep track of the synced emojis. You **ARE** supposed to commit this folder because running the application without emoji cache will result in conflicts and errors.
 
 Since only the local folder is used as the source, it is not recommended to manually manage emojis from the Discord Developer Portal. But don't worry, if you have existing emojis in your application that are not cached locally, they will be automatically downloaded to the local folder and added to cache during the syncing process.
