@@ -7,7 +7,7 @@ import { join } from 'path';
 config();
 
 const CACHE_DIR = '.projectCache';
-const CACHE_FILE = join(CACHE_DIR, 'emojis.json');
+const CACHE_FILE = join(CACHE_DIR, process.env.NODE_ENV === 'development' ? 'emojis.dev.json' : 'emojis.json');
 const EMOJIS_DIR = 'src/emojis';
 const ENUM_FILE = 'src/types/emojis.ts';
 const FILE_EXTENSIONS = /\.(png|jpe?g|gif)$/;

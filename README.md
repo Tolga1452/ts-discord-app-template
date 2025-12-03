@@ -97,6 +97,7 @@ pnpm install
 
 3. Rename the `.env.example` file to `.env` and update the environment variables as needed.
 
+- `NODE_ENV`: Change this **ONLY** if you are using separate bots for development and production. Set to `"development"` or `"production"` depending on the environment.
 - `DEBUG`: Set to `"true"` to enable debug logging.
 - `DISCORD_REGISTER_COMMANDS`: Set to `"true"` to automatically register commands when your application starts.
 - `DISCORD_APP_ID`: Your Discord application ID (required).
@@ -115,6 +116,9 @@ pnpm start
 ## Tips
 
 ### Emoji Syncing
+
+> [!CAUTION]
+> If you are using separate bots for development and production, make sure to set the `NODE_ENV` environment variable accordingly. The emoji syncing system uses different cache files for different environments to avoid conflicts.
 
 This template comes with a script that automatically syncs your Discord application's emojis with your local folder, using your local folder as the source.
 
