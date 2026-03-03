@@ -1,8 +1,5 @@
 import { Client } from 'discord.js';
-import { config } from 'dotenv';
 import events from './utils/events.js';
-
-config();
 
 const client = new Client({
     allowedMentions: {

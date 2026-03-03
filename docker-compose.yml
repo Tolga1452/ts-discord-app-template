@@ -1,0 +1,4 @@
+services:
+  discordapp:
+    build: .
+    env_file: .env

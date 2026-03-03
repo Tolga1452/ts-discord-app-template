@@ -2,19 +2,25 @@
   "name": "ts-discord-app-template",
   "version": "1.2.0",
   "description": "A template for creating Discord applications using TypeScript.",
-  "main": "./dist/index.js",
+  "main": "./src/index.ts",
   "scripts": {
     "clean": "pnpm command clear && pnpm component clear && pnpm modal clear",
-    "update-cmds": "node ./scripts/update-commands.js",
-    "command": "node ./scripts/command.js",
-    "update-events": "node ./scripts/update-events.js",
-    "event": "node ./scripts/event.js",
-    "update-components": "node ./scripts/update-components.js",
-    "component": "node ./scripts/component.js",
-    "update-modals": "node ./scripts/update-modals.js",
-    "modal": "node ./scripts/modal.js",
-    "emojis": "node ./scripts/update-emojis.js",
-    "start": "pnpm update-cmds && pnpm update-components && pnpm update-modals && pnpm update-events && pnpm emojis && tsc && node ."
+    "start": "bun run ./src/index.ts",
+    "dev": "bun gen:all && bun start",
+    "command": "bun run ./scripts/command.js",
+    "component": "bun run ./scripts/component.js",
+    "event": "bun run ./scripts/event.js",
+    "modal": "bun run ./scripts/modal.js",
+    "gen:commands": "bun run ./scripts/update-commands.js",
+    "gen:components": "bun run ./scripts/update-components.js",
+    "gen:events": "bun run ./scripts/update-events.js",
+    "gen:modals": "bun run ./scripts/update-modals.js",
+    "gen:emojis": "bun run ./scripts/update-emojis.js",
+    "gen:all": "bun gen:commands && bun gen:components && bun gen:modals && bun gen:events && bun gen:emojis",
+    "docker:build": "docker-compose build",
+    "docker:start": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs"
   },
   "keywords": [
     "discord",
@@ -23,15 +29,17 @@
     "ts",
     "template",
     "application",
-    "app"
+    "app",
+    "bun"
   ],
   "author": "Tolgchu",
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "discord.js": "^14.25.1"
+  },
+  "devDependencies": {
     "@types/node": "^25.3.3",
-    "discord.js": "^14.25.1",
-    "dotenv": "^17.3.1",
     "typescript": "^5.9.3"
   }
 }
