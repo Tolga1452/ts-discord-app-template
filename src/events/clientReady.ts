@@ -3,7 +3,7 @@ import { GatewayEvent, NonPrimaryEntryPointCommand } from '../types/index.js';
 import commands from '../utils/commands.js';
 
 export default {
-    name: 'ready',
+    name: 'clientReady',
     async execute(client) {
         console.log(`Logged in as ${client.user.tag}`);
 
@@ -44,4 +44,4 @@ export default {
             };
         };
     }
-} satisfies GatewayEvent<'ready'>;
+} satisfies GatewayEvent<'clientReady'>;
