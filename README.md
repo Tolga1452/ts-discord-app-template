@@ -9,7 +9,7 @@
   <a href="https://github.com/Tolga1452/ts-discord-app-template/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tolga1452/ts-discord-app-template" /></a>
   <a href="https://github.com/Tolga1452/ts-discord-app-template/releases"><img alt="Release" src="https://img.shields.io/github/v/release/Tolga1452/ts-discord-app-template?display_name=tag" /></a>
   <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" /></a>
-  <a href="https://pnpm.io"><img alt="pnpm" src="https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=fff" /></a>
+  <a href="https://bun.sh"><img alt="Bun" src="https://img.shields.io/badge/Bun-000000?logo=bun&logoColor=white" /></a>
   <a href="https://discord.js.org"><img alt="discord.js" src="https://img.shields.io/github/package-json/dependency-version/Tolga1452/ts-discord-app-template/discord.js" /></a>
 </h1>
 
@@ -22,8 +22,8 @@ This is a practical and advanced template for creating Discord applications usin
 
 - Fully typed with the pain of TypeScript.
 - Super simple event and interaction handling. I sacrificed my sanity for this.
-- Comes with `ready` and `interactionCreate` events along with example interaction files.
-- Custom interaction functions: `interaction.reply2()` and `interaction.update2()`. These functions are made for automatically using components v2 along with some more useful features. [Click here to learn more](#interactions).
+- Comes with `clientReady` and `interactionCreate` events along with example interaction files.
+- Custom interaction functions: `interaction.reply2()`, `interaction.update2()`, and `interaction.disableComponents()`. These functions are made for automatically using components v2 along with some more useful features. [Click here to learn more](#interactions).
 - An advanced but simple way to use custom IDs. Working with args inside components has never been easier.
 - Automatic emoji syncing between your local folder and Discord application. I sacrificed my soul for this because Discord doesn't have an endpoint for bulk emoji management. [Click here to learn more](#emoji-syncing).
 - Easy error handling, included with funny error messages.
@@ -73,9 +73,9 @@ This is a practical and advanced template for creating Discord applications usin
 ## Getting Started
 
 > [!NOTE]
-> This template uses [pnpm](https://pnpm.io/) as the package manager. It is recommended to use `pnpm` for installing dependencies and running scripts.
+> This template uses [Bun](https://bun.sh/). It is recommended to use `bun` for installing dependencies and running scripts.
 > 
-> Run `npm install -g pnpm` to install pnpm globally.
+> To install bun, see the [official installation guide](https://bun.com/get).
 
 1. Create a new repository using this template or clone it to your local machine.
 
@@ -89,11 +89,11 @@ git clone https://github.com/Tolga1452/ts-discord-app-template.git my-discord-ap
 
 ```bash
 cd my-discord-app
-pnpm install
+bun install
 ```
 
 > [!TIP]
-> You can run `pnpm clean` to remove any example interaction files.
+> You can run `bun clean` to remove any example interaction files.
 
 3. Rename the `.env.example` file to `.env` and update the environment variables as needed.
 
@@ -107,10 +107,10 @@ pnpm install
 cp .env.example .env
 ```
 
-4. Run your application
+4. Run your application to test (`bun start` is intended for production).
 
 ```bash
-pnpm start
+bun dev
 ```
 
 ## Tips
@@ -129,7 +129,7 @@ Any emojis you add/modify/remove in the `src/emojis` folder will be synced to yo
 
 Since only the local folder is used as the source, it is not recommended to manually manage emojis from the Discord Developer Portal. But don't worry, if you have existing emojis in your application that are not cached locally, they will be automatically downloaded to the local folder and added to cache during the syncing process.
 
-If you do not want to use this feature at all, you can simply remove the `pnpm emojis` part from the `pnpm start` script in the `package.json` file.
+If you do not want to use this feature at all, you can simply remove the `bun gen:emojis` part from the `start` and `gen:all` scripts in the `package.json` file.
 
 ### Emojis in Interaction Responses
 
@@ -142,9 +142,9 @@ These emojis can also be used in the `interaction.reply2()` and `interaction.upd
 
 ### Interactions
 
-For interaction responses, you can use the `interaction.reply2()` and `interaction.update2()` custom functions that are implemented directly into the interactions.
+For interaction responses, you can use the `interaction.reply2()`, `interaction.update2()`, and `interaction.disableComponents()` custom functions that are implemented directly into the interactions.
 
-The both functions automatically use components v2.
+All of the functions automatically use components v2.
 
 #### `interaction.reply2(options: string | InteractionReplyOptions, followUp: boolean = false)`
 
@@ -192,6 +192,29 @@ interaction.update2({
   emoji: Emoji.Wave,
   content: 'You clicked the button!'
 });
+```
+
+#### `interaction.disableComponents(exceptIds?: number[])`
+
+You can use this function to disable all interactive components of the reply or original message. It is especially useful when you have a long-running task and you want to prevent users from clicking the components multiple times until the task is finished.
+
+> [!NOTE]
+> There's no function to enable the components again. If you need a reply you can reuse, you can create a small helper that builds the message. That's usually better than duplicating the same code for the original reply and the updated versions.
+
+You can also use the `exceptIds` parameter to specify ID(s) of components that you want to keep enabled. **Note that these are the number IDs of the components, not the custom IDs.**
+
+- **For chat input, context menu, and modal interactions:** If you have already replied, this function will disable the components of the reply.
+- **For component interactions:** This function will disable the components of the original message (this function can also be a replacement for `interaction.deferUpdate()`). If you want to disable the components of the reply to the interaction instead, you should use the `disableReplyComponents()` function.
+
+**Example Usage:**
+```ts
+// A component interaction. We want to update the original message here, so we disable the components of the original message.
+await interaction.disableComponents();
+
+// A task that may take a while to complete
+const user = await db.getUser(interaction.user.id);
+
+await interaction.reply2(`Hello, ${user.name}!`);
 ```
 
 ### Custom IDs
@@ -267,29 +290,23 @@ This function works the same as `console.debug()`, the only difference is that i
 
 ## Helpful Scripts
 
-### `pnpm up`
-
-If you want to update your dependencies to their latest versions (by ignoring the version ranges specified in `package.json`), you can use this command.
-
-Since this script might update your dependencies to major versions, the updates may include breaking changes.
-
-### `pnpm command`
+### `bun command`
 
 This script allows you to quickly manage your app's command files.
 
 #### Example Usage
 
 ```bash
-pnpm command create slash my-command
-pnpm command remove my-command
-pnpm command clear
+bun command create slash my-command
+bun command remove my-command
+bun command clear
 ```
 
-#### `pnpm command create`
+#### `bun command create`
 
 Creates a new command file.
 
-**Usage:** `pnpm command create [<type>] [<name>] [<options>]`
+**Usage:** `bun command create [<type>] [<name>] [<options>]`
 
 **Arguments**
 - `type` (`--type`): The type of command to create (`slash`, `user`, `message`, `activity`). Default is `slash`.
@@ -298,125 +315,125 @@ Creates a new command file.
 - `--autocomplete`, `-ac`: For slash commands, implements autocomplete functionality.
 - `--guild <guild-id>`, `-g <guild-id>`: The ID of the guild to restrict the command to.
 
-#### `pnpm command remove`
+#### `bun command remove`
 
 Removes an existing command file.
 
-**Usage:** `pnpm command remove <name>`
+**Usage:** `bun command remove <name>`
 
 **Arguments**
 - `name` (`--name`): The name of the command to remove. Required.
 
-#### `pnpm command clear`
+#### `bun command clear`
 
 Removes all existing command files.
 
-**Usage:** `pnpm command clear`
+**Usage:** `bun command clear`
 
-### `pnpm component`
+### `bun component`
 
 This script allows you to quickly manage your app's component files.
 
 #### Example Usage
 
 ```bash
-pnpm component create my-component
-pnpm component remove my-component
-pnpm component clear
+bun component create my-component
+bun component remove my-component
+bun component clear
 ```
 
-#### `pnpm component create`
+#### `bun component create`
 
 Creates a new component file.
 
-**Usage:** `pnpm component create [<name>]`
+**Usage:** `bun component create [<name>]`
 
 **Arguments**
 - `name` (`--name`): The custom ID of the component to create. Default is `new-component`.
 
-#### `pnpm component remove`
+#### `bun component remove`
 
 Removes an existing component file.
 
-**Usage:** `pnpm component remove <name>`
+**Usage:** `bun component remove <name>`
 
 **Arguments**
 - `name` (`--name`): The custom ID of the component to remove. Required.
 
-#### `pnpm component clear`
+#### `bun component clear`
 
 Removes all existing component files.
 
-**Usage:** `pnpm component clear`
+**Usage:** `bun component clear`
 
-### `pnpm modal`
+### `bun modal`
 
 This script allows you to quickly manage your app's modal files.
 
 #### Example Usage
 
 ```bash
-pnpm modal create my-modal
-pnpm modal remove my-modal
-pnpm modal clear
+bun modal create my-modal
+bun modal remove my-modal
+bun modal clear
 ```
 
-#### `pnpm modal create`
+#### `bun modal create`
 
 Creates a new modal file.
 
-**Usage:** `pnpm modal create [<name>]`
+**Usage:** `bun modal create [<name>]`
 
 **Arguments**
 - `name` (`--name`): The custom ID of the modal to create. Default is `new-modal`.
 
-#### `pnpm modal remove`
+#### `bun modal remove`
 
 Removes an existing modal file.
 
-**Usage:** `pnpm modal remove <name>`
+**Usage:** `bun modal remove <name>`
 
 **Arguments**
 - `name` (`--name`): The custom ID of the modal to remove. Required.
 
-#### `pnpm modal clear`
+#### `bun modal clear`
 
 Removes all existing modal files.
 
-**Usage:** `pnpm modal clear`
+**Usage:** `bun modal clear`
 
-### `pnpm event`
+### `bun event`
 
 This script allows you to quickly manage your app's event files.
 
 #### Example Usage
 
 ```bash
-pnpm event create interactionCreate
-pnpm event remove interactionCreate
-pnpm event clear
+bun event create interactionCreate
+bun event remove interactionCreate
+bun event clear
 ```
 
-#### `pnpm event create`
+#### `bun event create`
 
 Creates a new event file.
 
-**Usage:** `pnpm event create [<name>]`
+**Usage:** `bun event create [<name>]`
 
 **Arguments**
 - `name` (`--name`): The name of the event to create. Default is `newEvent`.
 
-#### `pnpm event remove`
+#### `bun event remove`
 
 Removes an existing event file.
 
-**Usage:** `pnpm event remove <name>`
+**Usage:** `bun event remove <name>`
 
 **Arguments**
 - `name` (`--name`): The name of the event to remove. Required.
 
-#### `pnpm event clear`
+#### `bun event clear`
 
 Removes all existing event files.
 
-**Usage:** `pnpm event clear`
+**Usage:** `bun event clear`
