@@ -20,7 +20,9 @@
     "docker:build": "docker-compose build",
     "docker:start": "docker-compose up -d",
     "docker:stop": "docker-compose down",
-    "docker:logs": "docker-compose logs"
+    "docker:logs": "docker-compose logs",
+    "docker:logs:live": "docker-compose logs -f",
+    "docker:restart": "bun docker:stop && bun docker:build && bun docker:start"
   },
   "keywords": [
     "discord",
