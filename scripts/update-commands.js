@@ -1,6 +1,6 @@
-import { readdirSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, writeFileSync } from 'fs';
 
-const files = readdirSync('./src/interactions/commands').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_'));
+const files = existsSync('./src/interactions/commands') ? readdirSync('./src/interactions/commands').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_')) : [];
 
 let content = `import { Command } from '../types/index.js';\n\n`;
 

@@ -1,6 +1,6 @@
-import { readdirSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, writeFileSync } from 'fs';
 
-const files = readdirSync('./src/events').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', ''));
+const files = existsSync('./src/events') ? readdirSync('./src/events').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '')) : [];
 
 let content = `import { ClientEvents } from 'discord.js';\nimport { GatewayEvent } from '../types/index.js';\n\n`;
 

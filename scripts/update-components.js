@@ -1,6 +1,6 @@
-import { readdirSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, writeFileSync } from 'fs';
 
-const files = readdirSync('./src/interactions/components').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_'));
+const files = existsSync('./src/interactions/components') ? readdirSync('./src/interactions/components').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_')) : [];
 
 let content = `import { Component } from '../types/index.js';\n\n`;
 

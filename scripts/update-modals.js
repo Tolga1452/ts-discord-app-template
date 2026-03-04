@@ -1,6 +1,6 @@
-import { readdirSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, writeFileSync } from 'fs';
 
-const files = readdirSync('./src/interactions/modals').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_'));
+const files = existsSync('./src/interactions/modals') ? readdirSync('./src/interactions/modals').filter(file => file.endsWith('.ts')).map(file => file.replace('.ts', '').replaceAll('-', '_')) : [];
 
 let content = `import { Modal } from '../types/index.js';\n\n`;
 
