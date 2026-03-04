@@ -8,6 +8,6 @@ for (const file of files) {
     content += `import ${file} from '../interactions/modals/${file.replaceAll('_', '-')}.js';\n`;
 };
 
-content += `\nexport default [${files.join(', ')}] satisfies Modal[];\n`;
+content += `\nexport default [${files.join(', ')}] as Modal[];\n`;
 
 writeFileSync('./src/utils/modals.ts', content, 'utf8');

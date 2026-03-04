@@ -8,6 +8,6 @@ for (const file of files) {
     content += `import ${file} from '../interactions/components/${file.replaceAll('_', '-')}.js';\n`;
 };
 
-content += `\nexport default [${files.join(', ')}] satisfies Component[];\n`;
+content += `\nexport default [${files.join(', ')}] as Component[];\n`;
 
 writeFileSync('./src/utils/components.ts', content, 'utf8');

@@ -8,6 +8,6 @@ for (const file of files) {
     content += `import ${file} from '../events/${file}.js';\n`;
 };
 
-content += `\nexport default { ${files.join(', ')} } satisfies Partial<Record<keyof ClientEvents, GatewayEvent>>;\n`;
+content += `\nexport default { ${files.join(', ')} } as Partial<Record<keyof ClientEvents, GatewayEvent>>;\n`;
 
 writeFileSync('./src/utils/events.ts', content, 'utf8');
