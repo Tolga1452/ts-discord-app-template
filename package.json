@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "clean": "bun command clear && bun component clear && bun modal clear",
-    "start": "bun run ./src/index.ts",
+    "start": "bun gen:emojis && bun run ./src/index.ts",
     "dev": "bun gen:all && bun start",
     "command": "bun run ./scripts/command.js",
     "component": "bun run ./scripts/component.js",
