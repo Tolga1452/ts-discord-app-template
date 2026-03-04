@@ -9,7 +9,10 @@ export default {
     customId: 'component-test',
     args,
     async execute(interaction, args) {
-        await interaction.deferUpdate();
+        // Simulate a long-running task
+        await interaction.disableComponents(); // If you are updating the components of a reply instead of the original message, use the disableReplyComponents() method instead
+
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         const number = args.get('number');
 

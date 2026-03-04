@@ -38,27 +38,34 @@ export interface GatewayEvent<Event extends keyof ClientEvents = any> {
 
 export interface CustomChatInputCommandInteraction extends ChatInputCommandInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export interface CustomUserContextMenuCommandInteraction extends UserContextMenuCommandInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export interface CustomMessageContextMenuCommandInteraction extends MessageContextMenuCommandInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export interface CustomMessageContextMenuCommandInteraction extends MessageContextMenuCommandInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export interface CustomMessageComponentInteraction extends MessageComponentInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
     update2(options: string | CustomInteractionUpdateOptions): Promise<InteractionCallbackResponse | Message<boolean> | InteractionResponse<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
+    disableReplyComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export interface CustomModalSubmitInteraction extends ModalSubmitInteraction {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
 };
 
 export type CustomCommandInteraction = CustomChatInputCommandInteraction | CustomUserContextMenuCommandInteraction | CustomMessageContextMenuCommandInteraction;
@@ -76,6 +83,8 @@ export type AnyComponentInteraction = ButtonInteraction | AnySelectMenuInteracti
 type ComponentInteractionWithCustom<Type extends AnyComponentInteraction> = Type & {
     reply2(options: string | CustomInteractionReplyOptions, followUp?: boolean): Promise<InteractionResponse<boolean> | Message<boolean>>;
     update2(options: string | CustomInteractionUpdateOptions): Promise<InteractionCallbackResponse | Message<boolean> | InteractionResponse<boolean>>;
+    disableComponents(exceptIds?: number[]): Promise<void>;
+    disableReplyComponents(exceptIds?: number[]): Promise<void>;
 };
 
 type ComponentInteractionOf<Type extends ComponentType> = Extract<AnyComponentInteraction, { componentType: Type }>;

@@ -6,6 +6,7 @@ import { Emoji } from '../types/emojis.js';
 import components from '../utils/components.js';
 import CustomIdArgs from '../classes/CustomIdArgs.js';
 import modals from '../utils/modals.js';
+import disableComponents from '../utils/disableComponents.js';
 
 export default {
     name: 'interactionCreate',
@@ -49,6 +50,16 @@ export default {
                 if (followUp) return await interaction.followUp(replyOptions);
                 else if (interaction.replied || interaction.deferred) return await interaction.editReply(replyOptions as InteractionEditReplyOptions);
                 else return await interaction.reply(replyOptions);
+            };
+
+            (interaction as CustomCommandInteraction).disableComponents = async (exceptIds?: number[]) => {
+                const reply = await interaction.fetchReply();
+
+                if (!reply) return;
+
+                const components = disableComponents(reply.components, exceptIds);
+
+                await (interaction as CustomCommandInteraction).reply2({ components });
             };
 
             const command = commands.find(cmd => cmd.data.name === interaction.commandName);
@@ -153,6 +164,27 @@ export default {
                 return await interaction.update(updateOptions);
             };
 
+            (interaction as CustomMessageComponentInteraction).disableComponents = async (exceptIds?: number[]) => {
+                const message = interaction.message;
+
+                if (!message) return;
+
+                const components = disableComponents(message.components, exceptIds);
+
+                if (interaction.replied || interaction.deferred) await (interaction as CustomMessageComponentInteraction).reply2({ components });
+                else await (interaction as CustomMessageComponentInteraction).update2({ components });
+            };
+
+            (interaction as CustomMessageComponentInteraction).disableReplyComponents = async (exceptIds?: number[]) => {
+                const reply = await interaction.fetchReply();
+
+                if (!reply) return;
+
+                const components = disableComponents(reply.components, exceptIds);
+
+                await (interaction as CustomMessageComponentInteraction).reply2({ components });
+            };
+
             const [customId, argList] = interaction.customId.split(':');
 
             const args = argList ? argList.split(',') : [];
@@ -219,6 +251,16 @@ export default {
                 if (followUp) return await interaction.followUp(replyOptions);
                 else if (interaction.replied || interaction.deferred) return await interaction.editReply(replyOptions as InteractionEditReplyOptions);
                 else return await interaction.reply(replyOptions);
+            };
+
+            (interaction as CustomModalSubmitInteraction).disableComponents = async (exceptIds?: number[]) => {
+                const reply = await interaction.fetchReply();
+
+                if (!reply) return;
+
+                const components = disableComponents(reply.components, exceptIds);
+
+                await (interaction as CustomModalSubmitInteraction).reply2({ components });
             };
 
             const [customId, argList] = interaction.customId.split(':');
