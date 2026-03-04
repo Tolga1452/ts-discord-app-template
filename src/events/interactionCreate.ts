@@ -65,7 +65,7 @@ export default {
                 return;
             };
 
-            if ('execute' in command) {
+            if ('execute' in command && typeof command.execute === 'function') {
                 try {
                     await command.execute(interaction as any);
                 } catch (error) {
