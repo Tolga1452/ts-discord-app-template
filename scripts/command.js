@@ -17,7 +17,7 @@ try {
 } catch {}
 
 const binCandidates = pkg?.bin ? Object.keys(pkg.bin) : [];
-const BIN = "pnpm command";
+const BIN = "bun command";
 
 const isTTY = process.stdout.isTTY;
 const useColor = (isTTY && !("NO_COLOR" in process.env)) || ("FORCE_COLOR" in process.env);
@@ -221,7 +221,7 @@ export default {
         process.exitCode = 1;
         return;
       }
-      run("pnpm update-cmds");
+      run("bun gen:commands");
       log.ok("Command list updated");
       break;
     }
@@ -245,7 +245,7 @@ export default {
           return;
         }
       }
-      run("pnpm update-cmds");
+      run("bun gen:commands");
       log.ok("Command list updated");
       break;
     }
@@ -270,7 +270,7 @@ export default {
           }
         }
       }
-      run("pnpm update-cmds");
+      run("bun gen:commands");
       log.ok("Command list updated");
       break;
     }

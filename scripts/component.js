@@ -17,7 +17,7 @@ try {
 } catch {}
 
 const binCandidates = pkg?.bin ? Object.keys(pkg.bin) : [];
-const BIN = "pnpm component";
+const BIN = "bun component";
 
 const isTTY = process.stdout.isTTY;
 const useColor = (isTTY && !("NO_COLOR" in process.env)) || ("FORCE_COLOR" in process.env);
@@ -122,7 +122,7 @@ export default {
         process.exitCode = 1;
         return;
       }
-      run("pnpm update-components");
+      run("bun gen:components");
       log.ok("Component list updated");
       break;
     }
@@ -146,7 +146,7 @@ export default {
           return;
         }
       }
-      run("pnpm update-components");
+      run("bun gen:components");
       log.ok("Component list updated");
       break;
     }
@@ -169,7 +169,7 @@ export default {
           }
         }
       }
-      run("pnpm update-components");
+      run("bun gen:components");
       log.ok("Component list updated");
       break;
     }

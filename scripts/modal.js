@@ -17,7 +17,7 @@ try {
 } catch {}
 
 const binCandidates = pkg?.bin ? Object.keys(pkg.bin) : [];
-const BIN = "pnpm modal";
+const BIN = "bun modal";
 
 const isTTY = process.stdout.isTTY;
 const useColor = (isTTY && !("NO_COLOR" in process.env)) || ("FORCE_COLOR" in process.env);
@@ -121,7 +121,7 @@ export default {
         process.exitCode = 1;
         return;
       }
-      run("pnpm update-modals");
+      run("bun gen:modals");
       log.ok("Modal list updated");
       break;
     }
@@ -145,7 +145,7 @@ export default {
           return;
         }
       }
-      run("pnpm update-modals");
+      run("bun gen:modals");
       log.ok("Modal list updated");
       break;
     }
@@ -168,7 +168,7 @@ export default {
           }
         }
       }
-      run("pnpm update-modals");
+      run("bun gen:modals");
       log.ok("Modal list updated");
       break;
     }
