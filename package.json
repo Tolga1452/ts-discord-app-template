@@ -4,7 +4,7 @@
   "description": "A template for creating Discord applications using TypeScript.",
   "main": "./src/index.ts",
   "scripts": {
-    "clean": "pnpm command clear && pnpm component clear && pnpm modal clear",
+    "clean": "bun command clear && bun component clear && bun modal clear",
     "start": "bun run ./src/index.ts",
     "dev": "bun gen:all && bun start",
     "command": "bun run ./scripts/command.js",
