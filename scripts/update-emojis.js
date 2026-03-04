@@ -297,7 +297,7 @@ console.log('Generating emoji enum...');
 let enumContent = `export enum Emoji {\n`;
 
 for (const meta of newMeta) {
-    enumContent += `\t${meta.name} = '<${meta.animated ? 'a' : ''}:${meta.id}>',\n`;
+    enumContent += `\t${meta.name} = '<${meta.animated ? 'a' : ''}:${meta.name}:${meta.id}>',\n`;
 };
 
 enumContent += `};\n`;
