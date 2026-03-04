@@ -129,8 +129,7 @@ function main() {
 import { ChatInputCommand } from '../../types/index.js';
 
 export default {
-${guild ? `    guild: '${guild}',` : ""}
-    data: new SlashCommandBuilder()
+${guild ? `    guild: '${guild}',\n` : ""}    data: new SlashCommandBuilder()
         .setName('${name}')
         .setDescription('Placeholder description.')
         .setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
@@ -161,8 +160,7 @@ ${guild ? `    guild: '${guild}',` : ""}
 import { UserContextMenuCommand } from '../../types/index.js';
 
 export default {
-${guild ? `    guild: '${guild}',` : ""}
-    data: new ContextMenuCommandBuilder()
+${guild ? `    guild: '${guild}',\n` : ""}    data: new ContextMenuCommandBuilder()
         .setType(2)
         .setName('${name}')
         .setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
@@ -181,8 +179,7 @@ ${guild ? `    guild: '${guild}',` : ""}
 import { MessageContextMenuCommand } from '../../types/index.js';
 
 export default {
-${guild ? `    guild: '${guild}',` : ""}
-    data: new ContextMenuCommandBuilder()
+${guild ? `    guild: '${guild}',\n` : ""}    data: new ContextMenuCommandBuilder()
         .setType(3)
         .setName('${name}')
         .setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
